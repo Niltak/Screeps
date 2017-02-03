@@ -3,7 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var creepRespawn = require('creep.respawn');
 
-console.log('testing github');
+console.log('testing github go go go');
 
 module.exports.loop = function () {
 
