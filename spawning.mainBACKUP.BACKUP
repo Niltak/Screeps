@@ -1,0 +1,64 @@
+var spawningMain = {
+
+    run: function(spawnName) {
+
+        var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+        var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
+        var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+        var transporters = _.filter(Game.creeps, (creep) => creep.memory.role == 'transporter');
+        var control = Game.spawns.Spawn1.room.controller;
+        var creepBody = [WORK,CARRY,MOVE];
+
+        var howManyHarvesters = 1;
+        var howManyUpgraders = 1;
+        var howManyBuilders = 1;
+        var howManyTransporters = 1;
+
+        if (control.level > 1) {
+            
+            //console.log('level > 1');
+            
+            if (control.level == 2) {
+                
+                howManyHarvesters = 2;
+                howManyUpgraders = 2;
+                howManyBuilders = 2;
+                creepBody = [WORK,WORK,CARRY,MOVE,MOVE];
+                
+            }
+            
+            else if (control.level > 2) {
+                
+                howManyHarvesters = 2;
+                howManyUpgraders = 0;
+                howManyBuilders = 1;
+                howManyTransporters = 2;
+                creepBody = [WORK,CARRY,MOVE];
+                //creepBody = [WORK,WORK,CARRY,CARRY,MOVE,MOVE];
+                
+            }
+            
+        }
+
+        if (harvesters.length < howManyHarvesters) {
+            var newNameHarvester = Game.spawns[spawnName].createCreep(creepBody, 'harvester ' + Game.time.toString(), {role: 'harvester', spawnRoom: spawnName, job: 'harvesting'});
+            console.log('Spawning new harvester: ' + newNameHarvester);
+        }        
+        else if (upgraders.length < howManyUpgraders) {
+            var newNameUpgrader = Game.spawns[spawnName].createCreep(creepBody, 'upgrader ' + Game.time.toString(), {role: 'upgrader', spawnRoom: spawnName, job: 'harvesting'});
+            console.log('Spawning new upgrader: ' + newNameUpgrader);
+        }            
+        else if (builders.length < howManyBuilders) {
+            var newNameBuilder = Game.spawns[spawnName].createCreep(creepBody, 'builder ' + Game.time.toString(), {role: 'builder', spawnRoom: spawnName, job: 'harvesting'});
+            console.log('Spawning new builder: ' + newNameBuilder);
+        }
+        else if (transporters.length < howManyTransporters) {
+            var newNameBuilder = Game.spawns[spawnName].createCreep(creepBody, 'transporter ' + Game.time.toString(), {role: 'transporter', spawnRoom: spawnName, job: 'pickingup'});
+            console.log('Spawning new transporter: ' + newNameBuilder);
+        }
+   
+    }
+    
+};
+
+module.exports = spawningMain;

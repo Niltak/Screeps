@@ -21,8 +21,23 @@ module.exports.loop = function () {
             tower.attack(closestHostile);
         }
     }
+    
+    var spawn1 = Game.spawns.Spawn1;
+    var control = spawn1.room.controller;
+    var energyNeeded = 300;
 
-    spawningMain.run('Spawn1');
+    if (control.level > 1) {
+
+        //var energyNeeded = 400;
+
+    }
+    
+    
+    if(spawn1.room.energyAvailable >= energyNeeded && !(spawn1.hasOwnProperty.spawning)) {
+
+        spawningMain.run('Spawn1');
+    
+    }
 
     /*
 

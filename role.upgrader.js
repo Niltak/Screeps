@@ -1,29 +1,40 @@
+var jobUpgrading = require('job.upgrading');
+var jobTransporting = require('job.transporting');
+
 var roleUpgrader = {
 
-    /** @param {Creep} creep **/
     run: function(creep) {
 
-        if(creep.memory.upgrading && creep.carry.energy == 0) {
-            creep.memory.upgrading = false;
-            creep.say('harvesting');
-        }
-        if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.upgrading = true;
-            creep.say('upgrading');
+        //---Setting up Jobs
+
+        if (creep.memory.job != 'harvesting' && creep.carry.energy == 0) {
+            
+            creep.memory.job = 'harvesting';
+
         }
 
-        if(creep.memory.upgrading) {
-            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller);
-            }
+        else if (creep.memory.job != 'upgrading' && creep.carry.energy == creep.carryCapacity) {
+            
+            creep.memory.job = 'upgrading';
+
         }
-        else {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
-            }
+
+        //---Running Job
+
+        if (creep.memory.job == 'upgrading') {
+
+            jobUpgrading.run(creep);
+
         }
+
+        else if (creep.memory.job == 'harvesting') {
+
+            jobTransporting.run(creep);
+
+        }
+
     }
+
 };
 
 module.exports = roleUpgrader;
