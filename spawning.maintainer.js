@@ -1,4 +1,4 @@
-var spawningUpgrader = {
+var spawningMaintainer = {
 
     run: function(spawnRoomName, control, creepBody) {
 
@@ -20,7 +20,7 @@ var spawningUpgrader = {
                 
         else if (control > 2 && spawnRoomName.room.energyAvailable > 600) {
                     
-            creepBody = [WORK,WORK,WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //---500energy
+            creepBody = [WORK,CARRY,CARRY,MOVE,MOVE,MOVE]; //---500energy
 
             spawningNow = true;
                     
@@ -28,11 +28,17 @@ var spawningUpgrader = {
 
         if (spawningNow) {
 
-            console.log('New upgrader');
+            console.log('New maintainer');
 
-            var newNameUpgrader = spawnRoomName.createCreep(creepBody,
-                                'upgrader' + Game.time.toString(),
-                                {role: 'upgrader', spawnRoom: spawnRoomName.name, job: 'harvesting'});
+            var newNameTransporter = spawnRoomName.createCreep(creepBody,
+                                'maintainer' + Game.time.toString(),
+                                {role: 'maintainer', spawnRoom: spawnRoomName.name, job: 'gettingEnergy'});
+
+        }
+
+        else {
+
+            //console.log('transporter failed ' + spawnRoomName.room.energyAvailable);
 
         }
 
@@ -40,4 +46,4 @@ var spawningUpgrader = {
 
 };
 
-module.exports = spawningUpgrader;
+module.exports = spawningMaintainer;

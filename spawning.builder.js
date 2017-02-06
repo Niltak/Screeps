@@ -2,8 +2,6 @@ var spawningBuilder = {
 
     run: function(spawnRoomName, control, creepBody) {
 
-        console.log('builder being called ' + control);
-
         var spawningNow = false;
 
         if (control == 1) {
@@ -29,6 +27,8 @@ var spawningBuilder = {
         }
 
         if (spawningNow) {
+
+            console.log('New builder');
 
             var newNameBuilder = spawnRoomName.createCreep(creepBody,
                                 'builder' + Game.time.toString(),

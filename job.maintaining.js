@@ -1,14 +1,12 @@
-var jobUpgrading = require('job.upgrading');
+//var jobUpgrading = require('job.upgrading');
 //var jobBuilding = require('job.building');
-var jobDropMining = require('job.dropmining');
+//var jobDropMining = require('job.dropmining');
 
-var jobStoring = {
+var jobMaintaining = {
 
     run: function(creep) {
 
         //console.log('job correct')
-
-        /*
 
         var targets = creep.room.find(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -94,52 +92,8 @@ var jobStoring = {
 
         }
 
-        else { */
-
-            var storingEnergy = creep.room.storage;
-
-            if (creep.transfer(storingEnergy, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-
-                if (creep.moveByPath(creep.memory.pathing) == ERR_NOT_FOUND) {
-
-                    creep.moveTo(storingEnergy);
-
-                }
-
-            }
-
-            /*
-
-            var upgradersContainer = Game.getObjectById('f2ae4ff54f0057a');
-
-            if (upgradersContainer.store[RESOURCE_ENERGY] < 1900) {
-
-                if (!((creep.pos.x == upgradersContainer.pos.x) && (creep.pos.y == upgradersContainer.pos.y))) {
-
-                    //creep.moveTo(upgradersContainer.pos.x, upgradersContainer.pos.y);
-                    
-                    if (creep.moveByPath(creep.memory.pathing) == ERR_NOT_FOUND) {
-
-                        creep.moveTo(upgradersContainer);
-
-                    }
-
-                }
-
-                else {
-
-                    creep.drop(RESOURCE_ENERGY);
-
-                }
-
-            }
-
-            */
-
-        //}
-
     }
 
 };
 
-module.exports = jobStoring;
+module.exports = jobMaintaining;

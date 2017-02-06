@@ -1,8 +1,6 @@
 var spawningHarvester = {
 
-    run: function(spawnRoomName, control, creepBody) {
-
-        console.log('harvester being called ' + control);
+    run: function(spawnRoomName, control, creepBody, nodeNum) {
 
         var spawningNow = false;
 
@@ -30,9 +28,11 @@ var spawningHarvester = {
 
         if (spawningNow) {
 
+            console.log('New harvester');
+
             var newNameHarvester = spawnRoomName.createCreep(creepBody,
                                 'harvester' + Game.time.toString(),
-                                {role: 'harvester', spawnRoom: spawnRoomName.name, job: 'harvesting'});
+                                {role: 'harvester', spawnRoom: spawnRoomName.name, job: 'harvesting', node: nodeNum});
 
         }
 

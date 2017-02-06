@@ -2,8 +2,6 @@ var spawningTransporter = {
 
     run: function(spawnRoomName, control, creepBody) {
 
-        console.log('transporter being called "' + control +'"');
-
         var spawningNow = false;
 
         if (control == 1) {
@@ -20,7 +18,7 @@ var spawningTransporter = {
                     
         }
                 
-        else if (control > 2 && spawnRoomName.room.energyAvailable <= 750) {
+        else if (control > 2 && spawnRoomName.room.energyAvailable > 750) {
                     
             creepBody = [WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]; //---650energy
 
@@ -30,6 +28,8 @@ var spawningTransporter = {
 
         if (spawningNow) {
 
+            console.log('New transporter');
+
             var newNameTransporter = spawnRoomName.createCreep(creepBody,
                                 'transporter' + Game.time.toString(),
                                 {role: 'transporter', spawnRoom: spawnRoomName.name, job: 'pickingup'});
@@ -38,7 +38,7 @@ var spawningTransporter = {
 
         else {
 
-            console.log('transporter failed ' + spawnRoomName.room.energyAvailable);
+            //console.log('transporter failed ' + spawnRoomName.room.energyAvailable);
 
         }
 

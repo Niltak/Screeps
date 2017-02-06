@@ -4,15 +4,24 @@ var jobHarvesting = {
 
         //console.log('job correct')
 
-        if (creep.memory.spawnRoom == "Spawn1" && creep.memory.role == "harvester") {
+        var sources = false;
+        var containerTwo = false;
 
-            var sources = Game.getObjectById('b6160771a0bff6a');
+        if (creep.memory.role == 'harvester' && creep.memory.node == '1') {
+
+            sources = Game.getObjectById('b6160771a0bff6a');
+
+        }
+
+        else if (creep.memory.role == 'harvester' && creep.memory.node == '2') {
+
+            sources = Game.getObjectById('c1090771a0be939');
 
         }
 
         else {
 
-            var sources = Game.getObjectById('c1090771a0be939');
+            containerTwo = Game.getObjectById('5b02f26530fb300');
 
         }
             
@@ -21,6 +30,16 @@ var jobHarvesting = {
             if (creep.harvest(sources) == ERR_NOT_IN_RANGE) {
 
                 creep.moveTo(sources);
+
+            }
+
+        }
+
+        else {
+
+            if (creep.withdraw(containerTwo, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+
+                creep.moveTo(containerTwo);
 
             }
 

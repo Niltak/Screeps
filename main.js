@@ -4,14 +4,16 @@ var roleBuilder = require('role.builder');
 var spawningMain = require('spawning.main');
 var roleAttacker = require('role.attacker');
 var roleTransporter = require('role.transporter');
+var roleMaintainer = require('role.maintainer');
 
 module.exports.loop = function () {
 
     var tower = Game.getObjectById('e1555a7a22bb30d');
     if(tower) {
         var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => (structure.hits < (structure.hitsMax - 1000))
+            filter: (structure) => (structure.hits < (structure.hitsMax - 1000) && !(structure.structureType == 'constructedWall'))
         });
+
         if(closestDamagedStructure) {
             tower.repair(closestDamagedStructure);
         }
@@ -55,6 +57,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'transporter') {
             roleTransporter.run(creep);
+        }
+        if(creep.memory.role == 'maintainer') {
+            roleMaintainer.run(creep);
         }
     }
 }
